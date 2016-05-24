@@ -7,9 +7,9 @@
 //
 import Foundation
 
-struct KeychainItemFactory {
+public struct KeychainItemFactory {
   
-  static func load(itemClass: KeychainItemClass = .GenericPassword) -> [KeychainItem] {
+  public static func load(itemClass: KeychainItemClass = .GenericPassword) -> [KeychainItem] {
     let query: [String: AnyObject] = [
       kSecClass as String               : itemClass.rawValue as String,
       kSecMatchLimit as String          : kSecMatchLimitAll,
