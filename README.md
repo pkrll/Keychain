@@ -1,6 +1,6 @@
 # Keychain
 
-[![CI Status](http://img.shields.io/travis/Ardalan Samimi/Keychain.svg?style=flat)](https://travis-ci.org/Ardalan Samimi/Keychain)
+[![CI Status](http://img.shields.io/travis/pkrll/Keychain.svg?style=flat)](https://travis-ci.org/pkrll/Keychain)
 [![Version](https://img.shields.io/cocoapods/v/Keychain.svg?style=flat)](http://cocoapods.org/pods/Keychain)
 [![License](https://img.shields.io/cocoapods/l/Keychain.svg?style=flat)](http://cocoapods.org/pods/Keychain)
 [![Platform](https://img.shields.io/cocoapods/p/Keychain.svg?style=flat)](http://cocoapods.org/pods/Keychain)
@@ -22,7 +22,7 @@ pod "Keychain"
 
 ## Author
 
-Ardalan Samimi, ardalan.samimi@gmail.com
+Ardalan Samimi, ardalan@saturnfive.se
 
 ## License
 
