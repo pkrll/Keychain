@@ -5,6 +5,25 @@
 [![License](https://img.shields.io/cocoapods/l/Keychain.svg?style=flat)](http://cocoapods.org/pods/Keychain)
 [![Platform](https://img.shields.io/cocoapods/p/Keychain.svg?style=flat)](http://cocoapods.org/pods/Keychain)
 
+## Usage
+
+```swift
+    let kItem = KeychainItem(withItemClass: KeychainItemClass.GenericPassword)
+    kItem.account = "pkrll"
+    kItem.service = "Github.com"
+    kItem.label = "Github"
+    kItem.value = "somePassword"
+    kItem.synchronizable = true
+    
+    if kItem.save() {
+      // Success!
+    } else {
+      // Failure!!
+      let statusCode = kItem.OSStatusCode
+      print(statusCode)
+    }
+```
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
