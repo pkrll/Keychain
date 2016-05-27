@@ -322,10 +322,6 @@ public class KeychainItem {
    *  - Note: The account and service attributes must be set before loading.
    */
   public func load(withQuery query: [String: AnyObject]? = nil) -> Bool {
-    guard let account = self.account, let service = self.service else {
-      return false
-    }
-    
     var searchQuery = self.searchQuery
     searchQuery[kSecMatchLimit as String] = kSecMatchLimitOne
     searchQuery[kSecReturnData as String] = kCFBooleanTrue
