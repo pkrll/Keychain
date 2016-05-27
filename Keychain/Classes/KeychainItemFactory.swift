@@ -9,15 +9,7 @@ import Foundation
 
 public struct KeychainItemFactory {
   
-  public static func load(itemClass: KeychainItemClass = .GenericPassword) -> [KeychainItem] {
-    let query: [String: AnyObject] = [
-      kSecClass as String               : itemClass.rawValue as String,
-      kSecMatchLimit as String          : kSecMatchLimitAll,
-      kSecReturnData as String          : kCFBooleanTrue,
-      kSecReturnAttributes as String    : kCFBooleanTrue,
-      kSecAttrSynchronizable as String  : kSecAttrSynchronizableAny
-    ]
-    
+  public static func load(query: [String: AnyObject]) -> [KeychainItem] {
     let result = Keychain.load(query)
     var items: [KeychainItem] = []
     
@@ -25,7 +17,7 @@ public struct KeychainItemFactory {
       if let array = result.data as? NSArray {
         for dict in array {
           if dict is [String : AnyObject] {
-            let item = KeychainItem(withItemClass: .InternetPassword, attributeDictionary: dict as! [String : AnyObject])
+            let item = KeychainItem(attributeDictionary: dict as! [String : AnyObject])
             items.append(item)
           }
         }

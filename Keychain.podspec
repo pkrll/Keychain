@@ -8,16 +8,16 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Keychain'
-  s.version          = '0.1.1'
+  s.version          = '0.2.0'
   s.summary          = 'Keychain Wrapper Class.'
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+Save and load from the Keychain - the easy way.
                        DESC
   s.homepage         = 'https://github.com/pkrll/Keychain'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Ardalan Samimi' => 'ardalan@saturnfive.se' }
   s.source           = { :git => 'https://github.com/pkrll/Keychain.git', :tag => s.version.to_s }
-  s.social_media_url = 'https://twitter.com/pkrll'
+  s.social_media_url = 'https://twitter.com/ardalansamimi'
   s.ios.deployment_target = '8.0'
   s.source_files = 'Keychain/Classes/**/*'
   s.frameworks = 'Foundation'

@@ -8,6 +8,9 @@
 import Foundation
 
 public class KeychainItem {
+  
+  // MARK: - Public Properties
+  
   /**
    *  The value to save.
    */
@@ -222,26 +225,29 @@ public class KeychainItem {
    *  The OSStatus code returned.
    */
   public var OSStatusCode: OSStatus?
+  
+  // MARK: - Read Only Properties
+  
   /**
    *  The item class value (read only)
    *  - Note: This property is set upon initialization.
    */
-  private(set) var itemClass: String
+  public private(set) var itemClass: String
   /**
    *  The attributes dictionary (read only).
    */
-  private(set) var attributes: [String: AnyObject] = [:]
+  public private(set) var attributes: [String: AnyObject] = [:]
   /**
    *  The search query (read only).
    *
    *  - Note: You can add items with the load(_:) method.
    */
-  private(set) var searchQuery: [String: AnyObject] = [
-    kSecMatchLimit as String        : kSecMatchLimitOne,
-    kSecReturnData as String        : kCFBooleanTrue,
-    kSecReturnAttributes as String  : kCFBooleanTrue,
+  public private(set) var searchQuery: [String: AnyObject] = [
     kSecAttrSynchronizable as String: kSecAttrSynchronizableAny
   ]
+  
+  // MARK: - Init
+  
   /**
    *  Creates an instance of the Keychain Item structure.
    *  - Parameters:
@@ -249,12 +255,35 @@ public class KeychainItem {
    */
   public init(withItemClass itemClass: KeychainItemClass) {
     self.itemClass = itemClass.rawValue
+    self.configure()
   }
   
   public init(withItemClass itemClass: KeychainItemClass, attributeDictionary: [String: AnyObject]) {
     self.itemClass = itemClass.rawValue
     self.attributes = attributeDictionary
+    self.configure()
   }
+  
+  public init(attributeDictionary: [String: AnyObject]) {
+    self.itemClass = attributeDictionary[kSecClass as String] as? String ?? KeychainItemClass.GenericPassword.rawValue
+    self.attributes = attributeDictionary
+    self.configure()
+  }
+  
+  private func configure() {
+    self.searchQuery[kSecClass as String] = self.itemClass as String
+    
+    if let account = self.account {
+      self.searchQuery[kSecAttrAccount as String] = account
+    }
+    
+    if let service = self.service {
+      self.searchQuery[kSecAttrService as String] = service
+    }
+  }
+  
+  // MARK: - Edit Methods
+  
   /**
    *  Save the item to the Keychain.
    *  - Note: Before saving, the properties *account* and *service* should be set.
@@ -275,25 +304,43 @@ public class KeychainItem {
     
     return result.success
   }
+  
+  public func update(value: String? = nil) -> Bool {
+    if let value = value {
+      self.value = value
+    }
+    
+    let result = Keychain.update(self.searchQuery, attributes: self.attributes)
+    self.OSStatusCode = result.statusCode
+    
+    print(self.attributes)
+    print(self.searchQuery)
+    
+    return result.success
+  }
+  
   /**
    *  Load the item from the Keychain.
+   *
+   *  - Note: The account and service attributes must be set before loading.
    */
-  public func load(withExtraAttributes attributes: [String: AnyObject]? = nil) -> Bool {
+  public func load(withQuery query: [String: AnyObject]? = nil) -> Bool {
     guard let account = self.account, let service = self.service else {
       return false
     }
     
-    self.searchQuery[kSecClass as String] = self.itemClass as String
-    self.searchQuery[kSecAttrAccount as String] = account
-    self.searchQuery[kSecAttrService as String] = service
+    var searchQuery = self.searchQuery
+    searchQuery[kSecMatchLimit as String] = kSecMatchLimitOne
+    searchQuery[kSecReturnData as String] = kCFBooleanTrue
+    searchQuery[kSecReturnAttributes as String] = kCFBooleanTrue
     
-    if let queryItems = attributes {
+    if let queryItems = query {
       for (key, value) in queryItems {
-        self.searchQuery[key] = value
+        searchQuery[key] = value
       }
     }
     
-    let result = Keychain.load(self.searchQuery)
+    let result = Keychain.load(searchQuery)
     
     if let data = result.data as? [String: AnyObject] {
       self.attributes = data
