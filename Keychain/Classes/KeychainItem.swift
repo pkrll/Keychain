@@ -273,12 +273,12 @@ public class KeychainItem {
   private func configure() {
     self.searchQuery[kSecClass as String] = self.itemClass as String
     
-    if let account = self.account {
-      self.searchQuery[kSecAttrAccount as String] = account
+    if let acc = self.account {
+      self.searchQuery[kSecAttrAccount as String] = acc
     }
     
-    if let service = self.service {
-      self.searchQuery[kSecAttrService as String] = service
+    if let ser = self.service {
+      self.searchQuery[kSecAttrService as String] = ser
     }
   }
   
@@ -312,9 +312,6 @@ public class KeychainItem {
     
     let result = Keychain.update(self.searchQuery, attributes: self.attributes)
     self.OSStatusCode = result.statusCode
-    
-    print(self.attributes)
-    print(self.searchQuery)
     
     return result.success
   }
