@@ -55,8 +55,8 @@ public struct Keychain {
       kSecAttrAccount as String : key
     ]
     
-    if let data = self.secItemCopy(query).data as? NSData {
-      return String(data: data, encoding: NSUTF8StringEncoding)!
+    if let value = self.secItemCopy(query).data as? NSData {
+      return String(data: value, encoding: NSUTF8StringEncoding)!
     }
     
     return nil

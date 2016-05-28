@@ -115,7 +115,7 @@ class Tests: XCTestCase {
   }
   
   func testKeychainItemSave() {
-    let kItem = KeychainItem(withItemClass: KeychainItemClass.GenericPassword)
+    let kItem = KeychainItem(itemClass: KeychainItemClass.GenericPassword)
     kItem.account = "Test User"
     kItem.service = "Testing Site"
     kItem.label = "Testing label"
@@ -151,7 +151,7 @@ class Tests: XCTestCase {
 //  }
   
   func testKeychainItemLoad() {
-    let kItem = KeychainItem(withItemClass: KeychainItemClass.GenericPassword)
+    let kItem = KeychainItem(itemClass: KeychainItemClass.GenericPassword)
     kItem.account = "Test User"
     kItem.service = "Testing Site"
     kItem.label = "Testing label"
