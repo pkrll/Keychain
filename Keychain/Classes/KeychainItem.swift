@@ -6,7 +6,9 @@
 //
 //
 import Foundation
-
+/**
+ *  Create, save and load items from the system keychain.
+ */
 public class KeychainItem {
   
   // MARK: - Public Properties
@@ -49,6 +51,7 @@ public class KeychainItem {
   }
   /**
    *  Set true to sync the item to the iCloud Keychain.
+   *
    *  - Note: Default is false.
    */
   public var synchronizable: Bool? {
@@ -186,6 +189,7 @@ public class KeychainItem {
    *  Protocol attribute key.
    *
    *  Denotes the protocol for this item. Items of class Internet Password have this attribute.
+   *
    *  - SeeAlso: KeychainProtocolType for possible values.
    */
   public var internetProtocol: KeychainProtocolType? {
@@ -250,20 +254,46 @@ public class KeychainItem {
   
   /**
    *  Creates an instance of the Keychain Item structure.
-   *  - Parameters:
-   *    - withItemClass: The item class of the Keychain item. A KeychainItemClass enum.
+   *
+   *  - Parameter withItemClass: The item class of the Keychain item. A KeychainItemClass enum.
    */
   public init(withItemClass itemClass: KeychainItemClass) {
     self.itemClass = itemClass.rawValue
     self.configure()
   }
-  
+  /**
+   *  Creates an instance of the Keychain Item structure.
+   *
+   *  - Parameter withItemClass: The item class of the Keychain item. A KeychainItemClass enum.
+   *  - Parameter attributeDictionary: The item's attributes. Pass the search result dictionary returned by the ```SecItemCopyMatching(_:result:)``` method.
+   *
+   *  - Important: To create a new KeychainItem, call ```init(withItemClass:``` instead. Use this method only when manually retrieving an item by using ```SecItemCopyMatching(_:result:)```, or the Keychain struct function ```load(_:)```:
+   *
+   *  ```swift
+   *  let query: [String: AnyObject] = [...]
+   *  let dict = Keychain.load(query)
+   *  let item = KeychainItem(attributeDictionary: dict as! [String : AnyObject])
+   *  ```
+   */
   public init(withItemClass itemClass: KeychainItemClass, attributeDictionary: [String: AnyObject]) {
     self.itemClass = itemClass.rawValue
     self.attributes = attributeDictionary
     self.configure()
   }
-  
+  /**
+   *  Creates an instance of the Keychain Item structure.
+   *
+   *  - Parameter withItemClass: The item class of the Keychain item. A KeychainItemClass enum.
+   *  - Parameter attributeDictionary: The item's attributes. Pass the search result dictionary returned by the ```SecItemCopyMatching(_:result:)``` method.
+   *
+   *  - Important: To create a new KeychainItem, call ```init(withItemClass:``` instead. Use this method only when manually retrieving an item by using ```SecItemCopyMatching(_:result:)```, or the Keychain struct function ```load(_:)```:
+   *
+   *  ```swift
+   *  let query: [String: AnyObject] = [...]
+   *  let dict = Keychain.load(query)
+   *  let item = KeychainItem(attributeDictionary: dict as! [String : AnyObject])
+   *  ```
+   */
   public init(attributeDictionary: [String: AnyObject]) {
     self.itemClass = attributeDictionary[kSecClass as String] as? String ?? KeychainItemClass.GenericPassword.rawValue
     self.attributes = attributeDictionary
@@ -286,7 +316,10 @@ public class KeychainItem {
   
   /**
    *  Save the item to the Keychain.
-   *  - Note: Before saving, the properties *account* and *service* should be set.
+   *
+   *  - Parameter value: The value to save (optional).
+   *
+   *  - Note: Before saving, the properties *account* and *service* should be set. If you do not pass a value to when calling this method, the latest value will be saved.
    */
   public func save(value: String? = nil) -> Bool {
     if let value = value {
@@ -304,11 +337,19 @@ public class KeychainItem {
     
     return result.success
   }
-  
+  /**
+   *  Update the item in the Keychain.
+   *
+   *  - Parameter value: The value to save (optional).
+   *
+   *  - Note: This function will update all of the attributes of the item. If you do not pass a value to when calling this method, the latest value will be saved.
+   */
   public func update(value: String? = nil) -> Bool {
     if let value = value {
       self.value = value
     }
+    
+    self.configure()
     
     let result = Keychain.update(self.searchQuery, attributes: self.attributes)
     self.OSStatusCode = result.statusCode
@@ -318,6 +359,8 @@ public class KeychainItem {
   
   /**
    *  Load the item from the Keychain.
+   *
+   *  - Parameter withQuery: Add extra attributes to the search query. If set nil, the search query will consist of amongst other keys, the service and account keys.
    *
    *  - Note: The account and service attributes must be set before loading.
    */

@@ -8,10 +8,10 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Keychain'
-  s.version          = '0.2.2'
+  s.version          = '0.2.3'
   s.summary          = 'Keychain Wrapper Class.'
   s.description      = <<-DESC
-An easy-to-use wrapper class for using the system keychain and offers a simple interface to store user credentials with more advance features available.
+An easy-to-use wrapper for using the system keychain and offers a simple interface to store user credentials with more advance features available.
                        DESC
   s.homepage         = 'https://github.com/pkrll/Keychain'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }

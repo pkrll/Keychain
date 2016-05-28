@@ -6,15 +6,33 @@
 //
 //
 import Foundation
-
+/**
+ *  An enum representing the system keychain item types.
+ */
 public enum KeychainItemClass {
-  
+  /**
+   *  Generic password item.
+   */
   case GenericPassword
+  /**
+   *  Internet password item.
+   */
   case InternetPassword
+  /**
+   *  Certificate item.
+   */
   case Certificate
+  /**
+   *  Cryptographic key item.
+   */
   case Key
+  /**
+   *  Identity item.
+   */
   case Identity
-  
+  /**
+   *  The class item type will be returned as a string.
+   */
   public var rawValue: String {
     switch self {
     case .GenericPassword:

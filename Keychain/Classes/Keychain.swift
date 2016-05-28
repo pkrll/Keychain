@@ -1,14 +1,19 @@
 //
 //  Keychain.swift
-//  Pods
 //
 //  Created by Ardalan Samimi on 24/05/16.
 //
-//
 import Foundation
 /**
- *  Just another Keychain class.
+ *  Keychain is an easy-to-use wrapper for using the system keychain and offers a simple interface to store user credentials – with more advance features available.
+ *
  *  - Author: Ardalan Samimi
+ *
+ *  - Version: 0.2.2
+ *
+ *  - Requires: iOS 8.0
+ *
+ *  - SeeAlso: [Keychain Reference](http://cocoadocs.org/docsets/Keychain/0.2.2/index.html)
  */
 public struct Keychain {
   
@@ -17,9 +22,11 @@ public struct Keychain {
   // MARK: - Basic Keychain Methods
   /**
    *  Quick save an item to the keychain.
+   *
    *  - Parameters:
    *    - value: The string value to save to the keychain.
    *    - forKey: The name of the entry.
+   *
    *  - Returns: True if operation was successful.
    */
   public static func save(value: String, forKey key: String) -> Bool {
@@ -34,8 +41,9 @@ public struct Keychain {
   }
   /**
    *  Load an item from the keychain.
-   *  - Parameters:
-   *    - key: Name of the saved password.
+   *
+   *  - Parameter key: Name of the saved password.
+   *
    *  - Returns: A string value.
    */
   public static func load(key: String) -> String? {
@@ -55,7 +63,9 @@ public struct Keychain {
   }
   /**
    *  Deletes an item from the keychain.
+   *
    *  - Parameter key: Name of the item.
+   *
    *  - Returns: A boolean value.
    */
   public static func delete(key: String) -> Bool {
@@ -73,9 +83,12 @@ public struct Keychain {
    *  Save an item to the keychain.
    *
    *  This method allows for more advanced usage and requires a valid attributes dictionary.
+   *
    *  - Parameters:
    *    - attributes: A dictionary containing an item class key-value pair and optional attribute key-value pairs specifying the item's attribute values.
+   *
    *  - SeeAlso: [Keychain Services Reference](xcdoc://?url=developer.apple.com/library/ios/documentation/Security/Reference/keychainservices/index.html#//apple_ref/doc/constant_group/Attribute_Item_Keys)
+   *
    *  - Returns: A tuple with two members, reflecting the status of the operation.
    */
   public static func save(attributes: [String: AnyObject]) -> (success: Bool, statusCode: OSStatus) {
@@ -87,9 +100,12 @@ public struct Keychain {
    *  Load an item from the keychain.
    *
    *  This method allows for more advanced usage and requires a valid attributes dictionary.
+   *
    *  - Parameters:
    *    - query: A dictionary containing an item class specification and optional attributes for controlling the search.
+   *
    *  - SeeAlso: [Keychain Services Reference](xcdoc://?url=developer.apple.com/library/ios/documentation/Security/Reference/keychainservices/index.html#//apple_ref/doc/constant_group/Attribute_Item_Keys)
+   *
    *  - Returns: A tuple with three members, reflecting the status of the operation and the data fetched, if any.
    */
   public static func load(query: [String: AnyObject]) -> (success: Bool, statusCode: OSStatus, data: AnyObject?) {
@@ -101,10 +117,13 @@ public struct Keychain {
    *  Update an item in the keychain.
    *
    *  This method allows for more advanced usage and requires a valid attributes dictionary.
+   *
    *  - Parameters:
    *    - query: A dictionary containing an item class specification and optional attributes for controlling the search. Specify the items whose values you wish to change.
    *    - attributes: A dictionary containing the attributes whose values should be changed, along with the new values. Only real keychain attributes are permitted in this dictionary (no "meta" attributes are allowed.).
+   *
    *  - SeeAlso: [Keychain Services Reference](xcdoc://?url=developer.apple.com/library/ios/documentation/Security/Reference/keychainservices/index.html#//apple_ref/doc/constant_group/Attribute_Item_Keys)
+   *
    *  - Returns: A tuple with three members, reflecting the status of the operation and the data fetched, if any.
    */
   public static func update(query: [String: AnyObject], attributes: [String: AnyObject]) -> (success: Bool, statusCode: OSStatus) {
@@ -115,9 +134,12 @@ public struct Keychain {
    *  Delete an item from the Keychain.
    *
    *  This method allows for more advanced usage and requires a valid attributes dictionary.
+   *
    *  - Parameters:
    *    - query: A dictionary containing an item class specification and optional attributes for controlling the search.
+   *
    *  - SeeAlso: [Keychain Services Reference](xcdoc://?url=developer.apple.com/library/ios/documentation/Security/Reference/keychainservices/index.html#//apple_ref/doc/constant_group/Attribute_Item_Keys)
+   *
    *  - Returns: A tuple with two members, reflecting the status of the operation.
    */
   public static func delete(query: [String: AnyObject]) -> (success: Bool, statusCode: OSStatus) {
@@ -137,7 +159,7 @@ private extension Keychain {
     
     return (status, result)
   }
-  
+
   static func secItemAdd(attributes: [String: AnyObject]) -> OSStatus {
     self.secItemDelete(attributes)
     return SecItemAdd(attributes, nil)

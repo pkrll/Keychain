@@ -8,7 +8,7 @@
 import Foundation
 
 public enum KeychainProtocolType: String {
-  
+
   case FTP
   case FTPS
   case FTPProxy
