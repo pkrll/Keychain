@@ -257,7 +257,7 @@ public class KeychainItem {
    *
    *  - Parameter withItemClass: The item class of the Keychain item. A KeychainItemClass enum.
    */
-  public init(withItemClass itemClass: KeychainItemClass) {
+  public init(itemClass: KeychainItemClass) {
     self.itemClass = itemClass.rawValue
     self.configure()
   }
@@ -275,7 +275,7 @@ public class KeychainItem {
    *  let item = KeychainItem(attributeDictionary: dict as! [String : AnyObject])
    *  ```
    */
-  public init(withItemClass itemClass: KeychainItemClass, attributeDictionary: [String: AnyObject]) {
+  public init(itemClass: KeychainItemClass, attributeDictionary: [String: AnyObject]) {
     self.itemClass = itemClass.rawValue
     self.attributes = attributeDictionary
     self.configure()
@@ -364,7 +364,7 @@ public class KeychainItem {
    *
    *  - Note: The account and service attributes must be set before loading.
    */
-  public func load(withQuery query: [String: AnyObject]? = nil) -> Bool {
+  public func load(query: [String: AnyObject]? = nil) -> Bool {
     var searchQuery = self.searchQuery
     searchQuery[kSecMatchLimit as String] = kSecMatchLimitOne
     searchQuery[kSecReturnData as String] = kCFBooleanTrue
