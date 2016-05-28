@@ -4,6 +4,7 @@
 [![Version](https://img.shields.io/cocoapods/v/Keychain.svg?style=flat)](http://cocoapods.org/pods/Keychain)
 [![License](https://img.shields.io/cocoapods/l/Keychain.svg?style=flat)](http://cocoapods.org/pods/Keychain)
 [![Platform](https://img.shields.io/cocoapods/p/Keychain.svg?style=flat)](http://cocoapods.org/pods/Keychain)
+[![Documentation](https://img.shields.io/cocoapods/metrics/doc-percent/Keychain.svg?style=flat)](http://cocoadocs.org/docsets/Keychain/0.2.2/)
 
 **Keychain** is an easy-to-use wrapper class for using the system keychain and offers a simple interface to store user credentials with more advance features available.
 
