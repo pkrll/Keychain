@@ -111,7 +111,6 @@
 				607FACE31AFB9204008FA782 /* Resources */,
 				004FC67E9C63A247643AAA10 /* 📦 Embed Pods Frameworks */,
 				D14C1482752042B21A563FD4 /* 📦 Copy Pods Resources */,
-				6A74F0201D8EE338003E5897 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -198,19 +197,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
-		};
-		6A74F0201D8EE338003E5897 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "echo \"codesign --verify --force --sign \\\"$CODE_SIGN_IDENTITY\\\" \\\"$CODESIGNING_FOLDER_PATH\\\"\"\nIDENTITIES=`security find-identity -v -s \"Code Signing\" | grep \"iPhone Developer\" | awk '{ print $2 }'`\n\nfor SHA in $IDENTITIES; do\ncodesign --verify --force --sign $SHA \"$CODESIGNING_FOLDER_PATH\"\nif [ $? -eq 0 ]; then\necho \"Matching identity found: $SHA\"\nexit 0\nfi\ndone;\n\nexit 1";
 		};
 		D14C1482752042B21A563FD4 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
