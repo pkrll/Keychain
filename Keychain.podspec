@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Keychain'
-  s.version          = '0.2.3'
+  s.version          = '0.3.0'
   s.summary          = 'Keychain Wrapper Class.'
   s.description      = <<-DESC
 An easy-to-use wrapper for using the system keychain and offers a simple interface to store user credentials with more advance features available.
@@ -16,7 +16,7 @@ An easy-to-use wrapper for using the system keychain and offers a simple interfa
   s.homepage         = 'https://github.com/pkrll/Keychain'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Ardalan Samimi' => 'ardalan@saturnfive.se' }
-  s.source           = { :git => 'https://github.com/pkrll/Keychain.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/pkrll/Keychain.git', :tag => s.version.to_s, :branch => 'swift3' }
   s.social_media_url = 'https://twitter.com/ardalansamimi'
   s.ios.deployment_target = '8.0'
   s.source_files = 'Keychain/Classes/**/*'

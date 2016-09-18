@@ -8,7 +8,7 @@ class Tests: XCTestCase {
   
   override func setUp() {
     super.setUp()
-    self.basicTestKey = "BasicKey"
+    self.basicTestKey = "Basic key"
     // Put setup code here. This method is called before the invocation of each test method in the class.
   }
   
@@ -23,7 +23,7 @@ class Tests: XCTestCase {
   
   func testBasicSave() {
     let didSave = Keychain.save("some value", forKey: self.basicTestKey)
-    XCTAssert(didSave, "Pass: testBasicSave()")
+    XCTAssert(didSave, "testBasicSave()")
   }
   
   func testBasicLoad() {
@@ -51,10 +51,10 @@ class Tests: XCTestCase {
     let value = "Some value"
     
     let attributes: [String: AnyObject] = [
-      kSecClass as String       : kSecClassGenericPassword as String,
-      kSecAttrAccount as String : "Some Account",
-      kSecAttrService as String : "Some Service",
-      kSecValueData as String   : value.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
+      kSecClass as String       : kSecClassGenericPassword as String as String as AnyObject,
+      kSecAttrAccount as String : "Some Account" as AnyObject,
+      kSecAttrService as String : "Some Service" as AnyObject,
+      kSecValueData as String   : value.data(using: String.Encoding.utf8, allowLossyConversion: false)! as AnyObject
     ]
     
     let result = Keychain.save(attributes)
@@ -65,21 +65,21 @@ class Tests: XCTestCase {
   func testAdvancedLoad() {
     let value = "Some value"
     let attributes: [String: AnyObject] = [
-      kSecClass as String       : kSecClassGenericPassword as String,
-      kSecAttrAccount as String : "Some Account",
-      kSecAttrService as String : "Some Service",
-      kSecValueData as String   : value.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
+      kSecClass as String       : kSecClassGenericPassword as String as String as AnyObject,
+      kSecAttrAccount as String : "Some Account" as AnyObject,
+      kSecAttrService as String : "Some Service" as AnyObject,
+      kSecValueData as String   : value.data(using: String.Encoding.utf8, allowLossyConversion: false)! as AnyObject
     ]
     
     let result = Keychain.save(attributes)
     
     if result.success {
       let query: [String: AnyObject] = [
-        kSecClass as String       : kSecClassGenericPassword as String,
+        kSecClass as String       : kSecClassGenericPassword as String as String as AnyObject,
         kSecMatchLimit as String  : kSecMatchLimitOne,
         kSecReturnData as String  : kCFBooleanTrue,
-        kSecAttrService as String : "Some Service",
-        kSecAttrAccount as String : "Some Account"
+        kSecAttrService as String : "Some Service" as AnyObject,
+        kSecAttrAccount as String : "Some Account" as AnyObject
       ]
       
       let result = Keychain.load(query)
@@ -92,19 +92,19 @@ class Tests: XCTestCase {
   func testAdvancedDelete() {
     let value = "Some value"
     let attributes: [String: AnyObject] = [
-      kSecClass as String       : kSecClassGenericPassword as String,
-      kSecAttrAccount as String : "Some Account",
-      kSecAttrService as String : "Some Service",
-      kSecValueData as String   : value.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
+      kSecClass as String       : kSecClassGenericPassword as String as String as AnyObject,
+      kSecAttrAccount as String : "Some Account" as AnyObject,
+      kSecAttrService as String : "Some Service" as AnyObject,
+      kSecValueData as String   : value.data(using: String.Encoding.utf8, allowLossyConversion: false)! as AnyObject
     ]
     
     let result = Keychain.save(attributes)
     
     if result.success {
       let query: [String: AnyObject] = [
-        kSecClass as String       : kSecClassGenericPassword as String,
-        kSecAttrService as String : "Some Service",
-        kSecAttrAccount as String : "Some Account"
+        kSecClass as String       : kSecClassGenericPassword as String as String as AnyObject,
+        kSecAttrService as String : "Some Service" as AnyObject,
+        kSecAttrAccount as String : "Some Account" as AnyObject
       ]
       
       let result = Keychain.delete(query)
@@ -115,7 +115,7 @@ class Tests: XCTestCase {
   }
   
   func testKeychainItemSave() {
-    let kItem = KeychainItem(itemClass: KeychainItemClass.GenericPassword)
+    let kItem = KeychainItem(itemClass: KeychainItemClass.genericPassword)
     kItem.account = "Test User"
     kItem.service = "Testing Site"
     kItem.label = "Testing label"
@@ -151,7 +151,7 @@ class Tests: XCTestCase {
 //  }
   
   func testKeychainItemLoad() {
-    let kItem = KeychainItem(itemClass: KeychainItemClass.GenericPassword)
+    let kItem = KeychainItem(itemClass: KeychainItemClass.genericPassword)
     kItem.account = "Test User"
     kItem.service = "Testing Site"
     kItem.label = "Testing label"
@@ -160,7 +160,7 @@ class Tests: XCTestCase {
     
     if kItem.save() {
       let query: [String: AnyObject] = [
-        kSecClass as String                 : KeychainItemClass.GenericPassword.rawValue as String,
+        kSecClass as String                 : KeychainItemClass.genericPassword.rawValue as String as AnyObject,
         kSecMatchLimit as String            : kSecMatchLimitAll,
         kSecMatchCaseInsensitive as String  : kCFBooleanTrue,
         kSecReturnData as String            : kCFBooleanTrue,

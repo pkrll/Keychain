@@ -13,37 +13,37 @@ public enum KeychainItemClass {
   /**
    *  Generic password item.
    */
-  case GenericPassword
+  case genericPassword
   /**
    *  Internet password item.
    */
-  case InternetPassword
+  case internetPassword
   /**
    *  Certificate item.
    */
-  case Certificate
+  case certificate
   /**
    *  Cryptographic key item.
    */
-  case Key
+  case key
   /**
    *  Identity item.
    */
-  case Identity
+  case identity
   /**
    *  The class item type will be returned as a string.
    */
   public var rawValue: String {
     switch self {
-    case .GenericPassword:
+    case .genericPassword:
       return kSecClassGenericPassword as String
-    case .InternetPassword:
+    case .internetPassword:
       return kSecClassInternetPassword as String
-    case .Certificate:
+    case .certificate:
       return kSecClassCertificate as String
-    case .Key:
+    case .key:
       return kSecClassKey as String
-    case .Identity:
+    case .identity:
       return kSecClassIdentity as String
     }
   }

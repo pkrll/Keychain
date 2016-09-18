@@ -9,173 +9,173 @@ import Foundation
 
 public enum KeychainProtocolType: Int {
 
-  case FTP
-  case FTPS
-  case FTPProxy
-  case FTPAccount
-  case HTTP
-  case HTTPS
-  case HTTPProxy
-  case HTTPSProxy
-  case IRC
-  case IRCS
-  case NNTP
-  case NNTPS
-  case POP3
-  case POP3S
-  case SMTP
-  case SOCKS
-  case IMAP
-  case IMAPS
-  case LDAP
-  case LDAPS
-  case AppleTalk
-  case AFP
-  case Telnet
-  case TelnetS
-  case SSH
-  case SMB
-  case RTSP
-  case RTSPProxy
-  case DAAP
-  case DAAPS
-  case EPPC
-  case IPP
+  case ftp
+  case ftps
+  case ftpProxy
+  case ftpAccount
+  case http
+  case https
+  case httpProxy
+  case httpsProxy
+  case irc
+  case ircs
+  case nntp
+  case nntps
+  case pop3
+  case pop3S
+  case smtp
+  case socks
+  case imap
+  case imaps
+  case ldap
+  case ldaps
+  case appleTalk
+  case afp
+  case telnet
+  case telnetS
+  case ssh
+  case smb
+  case rtsp
+  case rtspProxy
+  case daap
+  case daaps
+  case eppc
+  case ipp
   
   public init(rawValue: String) {
     switch rawValue ?? "" {
     case kSecAttrProtocolFTP as String as String:
-      self = .FTP
+      self = .ftp
     case kSecAttrProtocolFTPS as String as String:
-      self = .FTPS
+      self = .ftps
     case kSecAttrProtocolFTPProxy as String as String:
-      self = .FTPProxy
+      self = .ftpProxy
     case kSecAttrProtocolFTPAccount as String as String:
-      self = .FTPAccount
+      self = .ftpAccount
     case kSecAttrProtocolHTTP as String as String:
-      self = .HTTP
+      self = .http
     case kSecAttrProtocolHTTPS as String as String:
-      self = .HTTPS
+      self = .https
     case kSecAttrProtocolHTTPProxy as String as String:
-      self = .HTTPProxy
+      self = .httpProxy
     case kSecAttrProtocolIRC as String as String:
-      self = .IRC
+      self = .irc
     case kSecAttrProtocolIRCS as String as String:
-      self = .IRCS
+      self = .ircs
     case kSecAttrProtocolNNTP as String as String:
-      self = .NNTP
+      self = .nntp
     case kSecAttrProtocolNNTPS as String as String:
-      self = .NNTPS
+      self = .nntps
     case kSecAttrProtocolPOP3 as String as String:
-      self = .POP3
+      self = .pop3
     case kSecAttrProtocolPOP3S as String as String:
-      self = .POP3S
+      self = .pop3S
     case kSecAttrProtocolSMTP as String as String:
-      self = .SMTP
+      self = .smtp
     case kSecAttrProtocolSOCKS as String as String:
-      self = .SOCKS
+      self = .socks
     case kSecAttrProtocolIMAP as String as String:
-      self = .IMAP
+      self = .imap
     case kSecAttrProtocolIMAPS as String as String:
-      self = .IMAPS
+      self = .imaps
     case kSecAttrProtocolLDAP as String as String:
-      self = .LDAP
+      self = .ldap
     case kSecAttrProtocolLDAPS as String as String:
-      self = .LDAPS
+      self = .ldaps
     case kSecAttrProtocolAppleTalk as String as String:
-      self = .AppleTalk
+      self = .appleTalk
     case kSecAttrProtocolAFP as String as String:
-      self = .AFP
+      self = .afp
     case kSecAttrProtocolTelnet as String as String:
-      self = .Telnet
+      self = .telnet
     case kSecAttrProtocolTelnetS as String as String:
-      self = .TelnetS
+      self = .telnetS
     case kSecAttrProtocolSSH as String as String:
-      self = .SSH
+      self = .ssh
     case kSecAttrProtocolSMB as String as String:
-      self = .SMB
+      self = .smb
     case kSecAttrProtocolRTSP as String as String:
-      self = .RTSP
+      self = .rtsp
     case kSecAttrProtocolRTSPProxy as String as String:
-      self = .RTSPProxy
+      self = .rtspProxy
     case kSecAttrProtocolDAAP as String as String:
-      self = .DAAP
+      self = .daap
     case kSecAttrProtocolLDAPS as String as String:
-      self = .DAAPS
+      self = .daaps
     case kSecAttrProtocolEPPC as String as String:
-      self = .EPPC
+      self = .eppc
     case kSecAttrProtocolIPP as String as String:
-      self = .IPP
+      self = .ipp
     default:
-      self = .HTTP
+      self = .http
     }
   }
   
   public var rawValue: String {
     switch self {
-    case .FTP:
+    case .ftp:
       return kSecAttrProtocolFTP as String
-    case .FTPS:
+    case .ftps:
       return kSecAttrProtocolFTPS as String
-    case .FTPProxy:
+    case .ftpProxy:
       return kSecAttrProtocolFTPProxy as String
-    case .FTPAccount:
+    case .ftpAccount:
       return kSecAttrProtocolFTPAccount as String
-    case .HTTP:
+    case .http:
       return kSecAttrProtocolHTTP as String
-    case .HTTPS:
+    case .https:
       return kSecAttrProtocolHTTPS as String
-    case .HTTPProxy:
+    case .httpProxy:
       return kSecAttrProtocolHTTPProxy as String
-    case .HTTPSProxy:
+    case .httpsProxy:
       return kSecAttrProtocolHTTPSProxy as String
-    case .IRC:
+    case .irc:
       return kSecAttrProtocolIRC as String
-    case .IRCS:
+    case .ircs:
       return kSecAttrProtocolIRCS as String
-    case .NNTP:
+    case .nntp:
       return kSecAttrProtocolNNTP as String
-    case .NNTPS:
+    case .nntps:
       return kSecAttrProtocolNNTPS as String
-    case .POP3:
+    case .pop3:
       return kSecAttrProtocolPOP3 as String
-    case .POP3S:
+    case .pop3S:
       return kSecAttrProtocolPOP3S as String
-    case .SMTP:
+    case .smtp:
       return kSecAttrProtocolSMTP as String
-    case .SOCKS:
+    case .socks:
       return kSecAttrProtocolSOCKS as String
-    case .IMAP:
+    case .imap:
       return kSecAttrProtocolIMAP as String
-    case .IMAPS:
+    case .imaps:
       return kSecAttrProtocolIMAPS as String
-    case .LDAP:
+    case .ldap:
       return kSecAttrProtocolLDAP as String
-    case .LDAPS:
+    case .ldaps:
       return kSecAttrProtocolLDAPS as String
-    case .AppleTalk:
+    case .appleTalk:
       return kSecAttrProtocolAppleTalk as String
-    case .AFP:
+    case .afp:
       return kSecAttrProtocolAFP as String
-    case .Telnet:
+    case .telnet:
       return kSecAttrProtocolTelnet as String
-    case .TelnetS:
+    case .telnetS:
       return kSecAttrProtocolTelnetS as String
-    case .SSH:
+    case .ssh:
       return kSecAttrProtocolSSH as String
-    case .SMB:
+    case .smb:
       return kSecAttrProtocolSMB as String
-    case .RTSP:
+    case .rtsp:
       return kSecAttrProtocolRTSP as String
-    case .RTSPProxy:
+    case .rtspProxy:
       return kSecAttrProtocolRTSPProxy as String
-    case .DAAP:
+    case .daap:
       return kSecAttrProtocolDAAP as String
-    case .DAAPS:
+    case .daaps:
       return kSecAttrProtocolLDAPS as String
-    case .EPPC:
+    case .eppc:
       return kSecAttrProtocolEPPC as String
-    case .IPP:
+    case .ipp:
       return kSecAttrProtocolIPP as String
     }
   }

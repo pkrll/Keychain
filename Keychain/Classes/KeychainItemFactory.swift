@@ -17,7 +17,7 @@ public struct KeychainItemFactory {
    *
    *  - Returns: An array of KeychainItem objects, created by the returned data from the keychain query.
    */
-  public static func load(query: [String: AnyObject]) -> [KeychainItem] {
+  public static func load(_ query: [String: AnyObject]) -> [KeychainItem] {
     let result = Keychain.load(query)
     var items: [KeychainItem] = []
     

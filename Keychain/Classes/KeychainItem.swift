@@ -9,26 +9,26 @@ import Foundation
 /**
  *  Create, save and load items from the system keychain.
  */
-public class KeychainItem {
+open class KeychainItem {
   
   // MARK: - Public Properties
   
   /**
    *  The value to save.
    */
-  public var value: String? {
+  open var value: String? {
     get {
-      if let data = self.attributes[kSecValueData as String] as? NSData {
-        return String(data: data, encoding: NSUTF8StringEncoding)
+      if let data = self.attributes[kSecValueData as String] as? Data {
+        return String(data: data, encoding: String.Encoding.utf8)
       }
       
       return nil
     }
     set {
       if let value = newValue {
-        self.attributes[kSecValueData as String] = value.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
+        self.attributes[kSecValueData as String] = value.data(using: String.Encoding.utf8, allowLossyConversion: false)! as AnyObject?
       } else {
-        self.attributes.removeValueForKey(kSecValueData as String)
+        self.attributes.removeValue(forKey: kSecValueData as String)
       }
     }
   }
@@ -37,15 +37,15 @@ public class KeychainItem {
    *
    *  Indicates which access group an item is in. Access groups can be used to share keychain items among two or more applications.
    */
-  public var accessGroup: String? {
+  open var accessGroup: String? {
     get {
       return self.attributes[kSecAttrAccessGroup as String] as? String
     }
     set {
       if let accessGroup = newValue {
-        self.attributes[kSecAttrAccessGroup as String] = accessGroup
+        self.attributes[kSecAttrAccessGroup as String] = accessGroup as AnyObject?
       } else {
-        self.attributes.removeValueForKey(kSecAttrAccessGroup as String)
+        self.attributes.removeValue(forKey: kSecAttrAccessGroup as String)
       }
     }
   }
@@ -54,7 +54,7 @@ public class KeychainItem {
    *
    *  - Note: Default is false.
    */
-  public var synchronizable: Bool? {
+  open var synchronizable: Bool? {
     get {
       return self.attributes[kSecAttrSynchronizable as String] as? Bool
     }
@@ -62,7 +62,7 @@ public class KeychainItem {
       if let doSync = newValue {
         self.attributes[kSecAttrSynchronizable as String] = (doSync) ? kCFBooleanTrue : kCFBooleanFalse
       } else {
-        self.attributes.removeValueForKey(kSecAttrSynchronizable as String)
+        self.attributes.removeValue(forKey: kSecAttrSynchronizable as String)
       }
     }
   }
@@ -71,15 +71,15 @@ public class KeychainItem {
    *
    *  A user-visible string describing this kind of item (for example, "Disk image password").
    */
-  public var description: String? {
+  open var description: String? {
     get {
       return self.attributes[kSecAttrDescription as String] as? String
     }
     set {
       if let description = newValue {
-        self.attributes[kSecAttrDescription as String] = description
+        self.attributes[kSecAttrDescription as String] = description as AnyObject?
       } else {
-        self.attributes.removeValueForKey(kSecAttrDescription as String)
+        self.attributes.removeValue(forKey: kSecAttrDescription as String)
       }
     }
   }
@@ -88,15 +88,15 @@ public class KeychainItem {
    *
    *  Contains the user-editable comment for this item.
    */
-  public var comment: String? {
+  open var comment: String? {
     get {
       return self.attributes[kSecAttrComment as String] as? String
     }
     set {
       if let comment = newValue {
-        self.attributes[kSecAttrComment as String] = comment
+        self.attributes[kSecAttrComment as String] = comment as AnyObject?
       } else {
-        self.attributes.removeValueForKey(kSecAttrComment as String)
+        self.attributes.removeValue(forKey: kSecAttrComment as String)
       }
     }
   }
@@ -105,15 +105,15 @@ public class KeychainItem {
    *
    *  Contains the user-visible label for this item.
    */
-  public var label: String? {
+  open var label: String? {
     get {
       return self.attributes[kSecAttrLabel as String] as? String
     }
     set {
       if let label = newValue {
-        self.attributes[kSecAttrLabel as String] = label
+        self.attributes[kSecAttrLabel as String] = label as AnyObject?
       } else {
-        self.attributes.removeValueForKey(kSecAttrLabel as String)
+        self.attributes.removeValue(forKey: kSecAttrLabel as String)
       }
     }
   }
@@ -122,15 +122,15 @@ public class KeychainItem {
    *
    *  Contains an account name. Items of class Generic Password and Internet Password have this attribute.
    */
-  public var account: String? {
+  open var account: String? {
     get {
       return self.attributes[kSecAttrAccount as String] as? String
     }
     set {
       if let account = newValue {
-        self.attributes[kSecAttrAccount as String] = account
+        self.attributes[kSecAttrAccount as String] = account as AnyObject?
       } else {
-        self.attributes.removeValueForKey(kSecAttrAccount as String)
+        self.attributes.removeValue(forKey: kSecAttrAccount as String)
       }
     }
   }
@@ -139,15 +139,15 @@ public class KeychainItem {
    *
    *  Represents the service associated with this item. Items of class Generic Password have this attribute.
    */
-  public var service: String? {
+  open var service: String? {
     get {
       return self.attributes[kSecAttrService as String] as? String
     }
     set {
       if let service = newValue {
-        self.attributes[kSecAttrService as String] = service
+        self.attributes[kSecAttrService as String] = service as AnyObject?
       } else {
-        self.attributes.removeValueForKey(kSecAttrService as String)
+        self.attributes.removeValue(forKey: kSecAttrService as String)
       }
     }
   }
@@ -156,15 +156,15 @@ public class KeychainItem {
    *
    *  Represents the Internet security domain. Items of class Internet Password have this attribute.
    */
-  public var securityDomain: String? {
+  open var securityDomain: String? {
     get {
       return self.attributes[kSecAttrSecurityDomain as String] as? String
     }
     set {
       if let securityDomain = newValue {
-        self.attributes[kSecAttrSecurityDomain as String] = securityDomain
+        self.attributes[kSecAttrSecurityDomain as String] = securityDomain as AnyObject?
       } else {
-        self.attributes.removeValueForKey(kSecAttrSecurityDomain as String)
+        self.attributes.removeValue(forKey: kSecAttrSecurityDomain as String)
       }
     }
   }
@@ -173,15 +173,15 @@ public class KeychainItem {
    *
    *  Contains the server's domain name or IP address. Items of class Internet Password have this attribute.
    */
-  public var server: String? {
+  open var server: String? {
     get {
       return self.attributes[kSecAttrServer as String] as? String
     }
     set {
       if let server = newValue {
-        self.attributes[kSecAttrServer as String] = server
+        self.attributes[kSecAttrServer as String] = server as AnyObject?
       } else {
-        self.attributes.removeValueForKey(kSecAttrServer as String)
+        self.attributes.removeValue(forKey: kSecAttrServer as String)
       }
     }
   }
@@ -192,7 +192,7 @@ public class KeychainItem {
    *
    *  - SeeAlso: KeychainProtocolType for possible values.
    */
-  public var internetProtocol: KeychainProtocolType? {
+  open var internetProtocol: KeychainProtocolType? {
     get {
       if let internetProtocol = self.attributes[kSecAttrProtocol as String] as? String {
         return KeychainProtocolType(rawValue: internetProtocol)
@@ -202,9 +202,9 @@ public class KeychainItem {
     }
     set {
       if let internetProtocol = newValue {
-        self.attributes[kSecAttrProtocol as String] = internetProtocol.rawValue as String
+        self.attributes[kSecAttrProtocol as String] = internetProtocol.rawValue as String as AnyObject?
       } else {
-        self.attributes.removeValueForKey(kSecAttrProtocol as String)
+        self.attributes.removeValue(forKey: kSecAttrProtocol as String)
       }
     }
   }
@@ -213,22 +213,22 @@ public class KeychainItem {
    *
    *  Represents a path, typically the path component of the URL. Items of class Internet Password have this attribute.
    */
-  public var path: String? {
+  open var path: String? {
     get {
       return self.attributes[kSecAttrPath as String] as? String
     }
     set {
       if let path = newValue {
-        self.attributes[kSecAttrPath as String] = path
+        self.attributes[kSecAttrPath as String] = path as AnyObject?
       } else {
-        self.attributes.removeValueForKey(kSecAttrPath as String)
+        self.attributes.removeValue(forKey: kSecAttrPath as String)
       }
     }
   }
   /**
    *  The OSStatus code returned.
    */
-  public var OSStatusCode: OSStatus?
+  open var OSStatusCode: OSStatus?
   
   // MARK: - Read Only Properties
   
@@ -236,17 +236,17 @@ public class KeychainItem {
    *  The item class value (read only)
    *  - Note: This property is set upon initialization.
    */
-  public private(set) var itemClass: String
+  open fileprivate(set) var itemClass: String
   /**
    *  The attributes dictionary (read only).
    */
-  public private(set) var attributes: [String: AnyObject] = [:]
+  open fileprivate(set) var attributes: [String: AnyObject] = [:]
   /**
    *  The search query (read only).
    *
    *  - Note: You can add items with the load(_:) method.
    */
-  public private(set) var searchQuery: [String: AnyObject] = [
+  open fileprivate(set) var searchQuery: [String: AnyObject] = [
     kSecAttrSynchronizable as String: kSecAttrSynchronizableAny
   ]
   
@@ -295,20 +295,20 @@ public class KeychainItem {
    *  ```
    */
   public init(attributeDictionary: [String: AnyObject]) {
-    self.itemClass = attributeDictionary[kSecClass as String] as? String ?? KeychainItemClass.GenericPassword.rawValue
+    self.itemClass = attributeDictionary[kSecClass as String] as? String ?? KeychainItemClass.genericPassword.rawValue
     self.attributes = attributeDictionary
     self.configure()
   }
   
-  private func configure() {
-    self.searchQuery[kSecClass as String] = self.itemClass as String
+  fileprivate func configure() {
+    self.searchQuery[kSecClass as String] = self.itemClass as String as AnyObject?
     
     if let acc = self.account {
-      self.searchQuery[kSecAttrAccount as String] = acc
+      self.searchQuery[kSecAttrAccount as String] = acc as AnyObject?
     }
     
     if let ser = self.service {
-      self.searchQuery[kSecAttrService as String] = ser
+      self.searchQuery[kSecAttrService as String] = ser as AnyObject?
     }
   }
   
@@ -321,7 +321,7 @@ public class KeychainItem {
    *
    *  - Note: Before saving, the properties *account* and *service* should be set. If you do not pass a value to when calling this method, the latest value will be saved.
    */
-  public func save(value: String? = nil) -> Bool {
+  open func save(_ value: String? = nil) -> Bool {
     if let value = value {
       self.value = value
     }
@@ -330,7 +330,7 @@ public class KeychainItem {
       return false
     }
     
-    self.attributes[kSecClass as String] = self.itemClass
+    self.attributes[kSecClass as String] = self.itemClass as AnyObject?
     
     let result = Keychain.save(self.attributes)
     self.OSStatusCode = result.statusCode
@@ -344,7 +344,7 @@ public class KeychainItem {
    *
    *  - Note: This function will update all of the attributes of the item. If you do not pass a value to when calling this method, the latest value will be saved.
    */
-  public func update(value: String? = nil) -> Bool {
+  open func update(_ value: String? = nil) -> Bool {
     if let value = value {
       self.value = value
     }
@@ -364,7 +364,7 @@ public class KeychainItem {
    *
    *  - Note: The account and service attributes must be set before loading.
    */
-  public func load(query: [String: AnyObject]? = nil) -> Bool {
+  open func load(_ query: [String: AnyObject]? = nil) -> Bool {
     var searchQuery = self.searchQuery
     searchQuery[kSecMatchLimit as String] = kSecMatchLimitOne
     searchQuery[kSecReturnData as String] = kCFBooleanTrue
