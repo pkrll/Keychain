@@ -43,7 +43,7 @@ public enum KeychainProtocolType: Int {
   case ipp
   
   public init(rawValue: String) {
-    switch rawValue ?? "" {
+    switch rawValue {
     case kSecAttrProtocolFTP as String as String:
       self = .ftp
     case kSecAttrProtocolFTPS as String as String:

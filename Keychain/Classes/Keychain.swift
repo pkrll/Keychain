@@ -161,7 +161,7 @@ private extension Keychain {
   }
 
   static func secItemAdd(_ attributes: [String: AnyObject]) -> OSStatus {
-    self.secItemDelete(attributes)
+    _ = self.secItemDelete(attributes)
     return SecItemAdd(attributes as CFDictionary, nil)
   }
   
