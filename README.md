@@ -1,6 +1,6 @@
 # Keychain
 
-[![CI Status](http://img.shields.io/travis/pkrll/Keychain.svg?style=flat)](https://travis-ci.org/pkrll/Keychain)
+[![CI Status](https://travis-ci.org/pkrll/Keychain.svg?branch=master)](https://travis-ci.org/pkrll/Keychain)
 [![Version](https://img.shields.io/cocoapods/v/Keychain.svg?style=flat)](http://cocoapods.org/pods/Keychain)
 [![License](https://img.shields.io/cocoapods/l/Keychain.svg?style=flat)](http://cocoapods.org/pods/Keychain)
 [![Platform](https://img.shields.io/cocoapods/p/Keychain.svg?style=flat)](http://cocoapods.org/pods/Keychain)
@@ -13,6 +13,21 @@
 * Basic save, load and delete methods allowing for advanced query/attributes dictionaries.
 * **Keychain** also includes the ```KeychainItem``` class, that allows for saving and loading items from the keychain as instances of the class, making it even easier to use the system keychain. (See below for more information).
 
+### Requirements
+* iOS 8
+
+### Installation
+Keychain is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
+
+```ruby
+pod "Keychain"
+```
+
+For Swift 3 support, use the following:
+```ruby
+pod "Keychain", :git => 'https://github.com/pkrll/Keychain.git', :branch => 'swift3'
+```
+
 ## Quick usage
 There are several ways to go about to save an item to the keychain. The most basic is just calling the class function ```save(_:forKey:)```. This will save the specified value to the keychain, that can later be retrieved by using the value passed to the ```forKey``` parameter.
 ```swift
@@ -21,7 +36,7 @@ Keychain.save("some value", forKey: "Some key")
 
 // You can retrieve it by using the same key:
 let data = Keychain.load("Some Key")
-print(data) 
+print(data)
 // Prints "some value"
 ```
 Deleting the item from the keychain follows the same logic:
@@ -94,7 +109,7 @@ if result.success {
 }
 ```
 ## Using KeychainItem (Beta)
-**Keychain** includes the class ```KeychainItem``` that hides away a lot of the ugliness that you'd otherwise have to handle when working with Keychain Services. 
+**Keychain** includes the class ```KeychainItem``` that hides away a lot of the ugliness that you'd otherwise have to handle when working with Keychain Services.
 
 Instead of definining attributes and search dictionaries, ```KeychainItem``` offers a more intuitive, OOP-way of using Keychain Services.
 
@@ -141,15 +156,6 @@ if kItem.update() {
 } else {
   print(kItem.OSStatusCode)
 }
-```
-## Requirements
-* iOS 8
-
-## Installation
-Keychain is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
-
-```ruby
-pod "Keychain"
 ```
 
 ## Author
